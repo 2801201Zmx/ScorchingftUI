@@ -1,0 +1,73 @@
+<template>
+    <div class="frame">
+        <div class="language">
+            <slot name="codetype"></slot>
+        </div>
+        <div class="grammar" @mouseenter="hideCode(1)" @mouseleave="hideCode(0)">
+            <span v-if="isShell">
+                $&nbsp;&nbsp;&nbsp;
+            </span>
+            <span class="code">
+                <slot name="code"></slot>
+            </span>
+            <span class="btn">
+                <Copybtn @click="CopyObject('#code',code)" id="code" v-if="isHide"/>
+            </span>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import Copybtn from '@/component/Copy.vue';
+import CopyObject from '@/utils/copy'
+
+const props = defineProps({
+    isShell: {
+        type: Boolean,
+        default: true
+    },
+    code: {
+        type: String,
+        default:''
+    }
+})
+
+const isHide = ref<boolean>(false);
+
+function hideCode(id: number) {
+    id ? isHide.value = true : isHide.value = false;
+}
+</script>
+
+<style scoped>
+.frame{
+    box-sizing: border-box;
+    padding: 5px 0;
+    background-color: var(--code-background-color);
+}
+
+.language {
+    font-size: 0.9rem;
+    padding: 0 20px;
+    text-align: right;
+}
+
+.grammar {
+    padding: 20px 20px;
+    position: relative;
+}
+
+.code {
+    display: inline-block;
+    width: 96%;
+    white-space: pre-wrap;
+    line-height: 30px;
+}
+
+.btn {
+    position: absolute;
+    top: 10%;
+    right: 0;
+}
+</style>

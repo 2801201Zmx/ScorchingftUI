@@ -1,0 +1,16 @@
+<template>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+    <path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+    <path d="M2.81 2.81L21.19 21.19 19.78 22.6 1.39 4.21 2.81 2.81z"/>
+  </svg>
+</template>
+
+<style scoped>
+svg {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    vertical-align: -0.125em;
+}
+</style>

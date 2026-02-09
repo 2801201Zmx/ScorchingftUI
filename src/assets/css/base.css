@@ -1,0 +1,15 @@
+:root {
+  --code-background-color: aliceblue;
+  --topic-color: #ca92ff;
+  --topic-color-dark:#901aff;
+  --topic-color-night: #764ba2;
+  --topic-color-hover: #d4b2ff;
+  --topic-color-active: #b38aff;
+  --topic-color-focus: #a57aff;
+  --topic-color-text: #8d6cd4;
+  --topic-color-text-dark: #000000;
+  --topic-color-text-light: #ffffff;
+  --topic-color-border: #ce9bfd;
+  --topic-color-border-hover: #b38aff;
+  --topic-color-border-active: #d4b2ff;
+}
