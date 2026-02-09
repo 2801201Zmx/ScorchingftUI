@@ -38,7 +38,7 @@
                 <div class="h1">
                     API
                 </div>
-                <div class="attributes">
+                <div class="attributes" v-for="(indexs, apis) in api">
                     <div class="h2">
                         Attributes
                     </div>
@@ -120,7 +120,7 @@ import { ref, reactive } from 'vue';
 
 import Code from '@/component/code.vue';
 
-import type { Attributess, SetupSteps, Slotss } from '@/types/type';
+import type { Attributess, SetupSteps, Slotss, Api } from '@/types/type';
 
 const props = defineProps({
     setupsteps: {
@@ -134,6 +134,10 @@ const props = defineProps({
     slots: {
         type: Array<Slotss>,
         default: []
+    },
+    api: {
+        type: Object as () => Api,
+        default: {}
     },
     isapi: {
         type: Boolean,

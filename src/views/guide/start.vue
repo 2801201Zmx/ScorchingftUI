@@ -245,11 +245,13 @@ p a:hover {
     background-color: #c1c8ce3f;
 }
 
-.content .compatibility table {
-    width: 90%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    text-align: center;
+.packagename {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
 }
 
 table {

@@ -55,7 +55,12 @@ interface Loaderprops {
     componentType?: 'guide' | 'components'
 }
 
+interface Api {
+    attributess: Attributess[],
+    slots: Slotss[]
+}
+
 export type { 
     Components, Strings, Compatibility, InstallMethodsItem, 
-    SetupSteps, Attributess, Slotss, StateItem, Loaderprops
+    SetupSteps, Attributess, Slotss, Api, StateItem, Loaderprops,
 };
