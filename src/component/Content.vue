@@ -38,7 +38,7 @@
                 <div class="h1">
                     API
                 </div>
-                <div class="attributes" v-for="(indexs, apis) in api">
+                <div :class="indexs" v-for="(apis, indexs) in api">
                     <div class="h2">
                         Attributes
                     </div>
@@ -60,9 +60,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in attributes">
+                            <tr v-for="(item, index) in apis">
                                 <td>
-                                    {{ item.attributesname }}
+                                    {{ item.name }}
                                 </td>
                                 <td>
                                     {{ item.meaning }}
@@ -77,39 +77,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="slots">
-                    <div class="h2">
-                        Slots
-                    </div>
-                    <table cellpadding="0" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>
-                                    插槽名
-                                </th>
-                                <th>
-                                    说明
-                                </th>
-                                <th>
-                                </th>
-                                <th>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item, index) in slots">
-                                <td>
-                                    {{ item.slotsname }}
-                                </td>
-                                <td>
-                                    {{ item.meaning }}
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     </div>
@@ -120,19 +87,11 @@ import { ref, reactive } from 'vue';
 
 import Code from '@/component/code.vue';
 
-import type { Attributess, SetupSteps, Slotss, Api } from '@/types/type';
+import type { Attributessslots, SetupSteps, Api } from '@/types/type';
 
 const props = defineProps({
     setupsteps: {
         type: Array<SetupSteps>,
-        default: []
-    },
-    attributes: {
-        type: Array<Attributess>,
-        default: []
-    },
-    slots: {
-        type: Array<Slotss>,
         default: []
     },
     api: {

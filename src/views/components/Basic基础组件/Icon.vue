@@ -1,5 +1,5 @@
 <template>
-    <Content :setupsteps="setupSteps" :attributes="attributes" :slots="slots">
+    <Content :setupsteps="setupSteps" :api="api">
         <template #text>
             <p>
                 如果你想用例一样直接使用，你需要<a class="cursor"
@@ -57,7 +57,7 @@ import Content from '@/component/Content.vue';
 import codetext from '@/codetext/index';
 import getArrowIcon from '@/utils/getIcon';
 
-import type { Slotss, Attributess, InstallMethodsItem, SetupSteps } from '@/types/type';
+import type { Api, Attributessslots, InstallMethodsItem, SetupSteps } from '@/types/type';
 const previewicon = {
     System: getArrowIcon("system"),
     Arrow: getArrowIcon("arrow"),
@@ -89,27 +89,32 @@ const borderbottom = ref<Array<string>>([]);
 
 borderbottom.value[0] = '3px solid #ca92ff';
 
-const attributes = reactive<Array<Attributess>>([
+const attributes = reactive<Array<Attributessslots>>([
     {
-        attributesname: 'color',
+        name: 'color',
         meaning: 'SVG的 fill 颜色',
         type: 'string',
         default: '继承颜色'
     },
     {
-        attributesname: 'size',
+        name: 'size',
         meaning: 'SVG图标的大小，size x size',
         type: 'string / number',
         default: '继承字体大小'
     }
 ])
 
-const slots = reactive<Array<Slotss>>([
+const slots = reactive<Array<Attributessslots>>([
     {
-        slotsname: 'default',
+        name: 'default',
         meaning: '自定义默认内容'
     }
 ])
+
+const api = reactive<Api>({
+    attributess: attributes,
+    slots: slots
+});
 
 const setupSteps = reactive<Array<SetupSteps>>([
     {

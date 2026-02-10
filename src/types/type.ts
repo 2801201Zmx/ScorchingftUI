@@ -32,16 +32,11 @@ interface SetupSteps {
     istips?: boolean
 }
 
-interface Attributess {
-    attributesname: string,
+interface Attributessslots {
+    name: string,
     meaning: string,
-    type: string,
-    default: string
-}
-
-interface Slotss {
-    slotsname: string,
-    meaning: string
+    type?: string,
+    default?: string
 }
 
 interface StateItem {
@@ -56,11 +51,11 @@ interface Loaderprops {
 }
 
 interface Api {
-    attributess: Attributess[],
-    slots: Slotss[]
+    attributess: Attributessslots[],
+    slots: Attributessslots[]
 }
 
 export type { 
     Components, Strings, Compatibility, InstallMethodsItem, 
-    SetupSteps, Attributess, Slotss, Api, StateItem, Loaderprops,
+    SetupSteps, Attributessslots, Api, StateItem, Loaderprops,
 };
