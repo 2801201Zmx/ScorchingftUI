@@ -9,9 +9,11 @@
     </main>
 </template>
 <script setup lang="ts">
-import Siderbar from './siderbar/siderbar.vue';
 import { onMounted } from 'vue';
-import { getPathName } from '@/utils/getpathname';
+
+import { getPathName } from '@/hooks/getpathname';
+
+import Siderbar from './siderbar/siderbar.vue';
 
 onMounted(() => {
     getPathName(window.location.pathname);

@@ -12,8 +12,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+
+import { getPathName } from '@/hooks/getpathname';
+
 import Siderbar from './siderbar/siderbar.vue';
-import { getPathName } from '@/utils/getpathname';
 
 const router = useRouter();
 

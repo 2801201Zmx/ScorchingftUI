@@ -13,6 +13,7 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+
 import Components from '@/JSON/guide.json';
 
 const router = useRouter();

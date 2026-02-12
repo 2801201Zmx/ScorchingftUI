@@ -1,81 +1,79 @@
 <template>
-  <div class="overview">
-    <div class="zhan"></div>
-    <div class="header">
-      <h1>Scorchingft UI 组件库</h1>
-      <p>一套为开发者、设计师准备的 Vue 3 组件库，提供了丰富的组件以满足日常开发需求。</p>
-    </div>
-    
-    <div class="components-grid" v-for="(group, index) in components" :key="index">
-      <h2 class="group-title">{{ group.title }}</h2>
-      <div class="component-list">
-        <div 
-          class="component-card" 
-          v-for="(component, compIndex) in group.components" 
-          :key="compIndex"
-          @click="goToComponent(component.path)"
-        >
-          <div class="component-preview">
-            <img v-if="component.issrc" :src="getImage(component.src)" alt="">
-            <div v-else class="preview-placeholder">
-              {{ component.title.split(' ')[0] }}
-            </div>
-          </div>
-          <div class="component-info">
-            <h3>{{ component.title }}</h3>
-            <p class="component-description">点击查看 {{ component.title }} 组件的详细文档和使用示例</p>
-          </div>
-        </div>
+  <Content :setupsteps="setupSteps" :isapi="false">
+    <template #default>
+      <div class="header">
+        <h1>Scorchingft UI 组件库</h1>
+        <p>一套为开发者、设计师准备的 Vue 3 组件库，提供了丰富的组件以满足日常开发需求。</p>
       </div>
-    </div>
-  </div>
+    </template>
+    <template #view-preview="viewPreview">
+      <div class="overview">
+        <sf-card :width="360" :height="280" border="var(--overview-card-size)" solid color="var(--overview-card-color)"
+          class="card" v-for="(child, index) in getCategory(viewPreview.title)">
+          <div class="overviews">
+            {{ child }}
+          </div>
+          <div class="overviews-content">
+          </div>
+        </sf-card>
+      </div>
+    </template>
+  </Content>
 </template>
 
 <script setup lang="ts">
+import { onBeforeMount, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import components from '@/JSON/overview.json';
 
-import overviewButton from '@/assets/images/overview_button.png';
-import overviewIcon from '@/assets/images/overview_icon.png';
-import overviewInput from '@/assets/images/overview_input.png';
-import overviewForm from '@/assets/images/overview_form.png';
+import type { SetupSteps } from '@/types/type';
 
-const router = useRouter();
+import Content from '@/component/Content.vue';
+import Components from '@/JSON/components.json';
 
-const imageMap: Record<string, string> = {
-  '@/assets/images/overview_button.png': overviewButton,
-  '@/assets/images/overview_icon.png': overviewIcon,
-  '@/assets/images/overview_input.png': overviewInput,
-  '@/assets/images/overview_form.png': overviewForm,
-};
+const setupSteps = reactive<SetupSteps[]>([]);
 
-const getImage = (imagePath: string) => {
-  return imageMap[imagePath] || imagePath;
-};
+function changeArry(arr: { title: string, components: { title: string, path: string }[] }[]) {
+  for (const obj of arr) {
+    setupSteps.push({
+      title: '',
+      subheading: obj.title,
+      maintext: '',
+      code: '',
+      codetype: '',
+      slot: 'view',
+      isshell: false
+    });
+  }
 
-const goToComponent = (path: string) => {
-  router.push(`/components/${path}`);
-};
+  setupSteps.splice(0,1);
+
+}
+
+function getCategory(title: string): string[] {
+  let obj: { [key: string]: string[] } = {};
+  for (const objs of Components) {
+    let array: string[] = [];
+    for (const child of objs.components)
+      array.push(child.title);
+    obj[`${objs.title}`] = array;
+  }
+
+  delete obj["Overview 概览"];
+
+  return obj[title];
+}
+
+onBeforeMount(() => {
+  changeArry(Components);
+})
 </script>
 
 <style scoped>
-.zhan {
-  height: 80px;
-}
-
-.overview {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 0 40px 0 20px;
-  overflow: scroll;
-}
-
 .header {
   text-align: center;
   margin-bottom: 40px;
   padding: 20px;
-  background-color:#ad82df;
+  background-color: #ad82df;
   border-radius: 6px;
   color: white;
 }
@@ -90,71 +88,37 @@ const goToComponent = (path: string) => {
   opacity: 0.9;
 }
 
-.group-title {
-  font-size: 1.8rem;
-  margin: 30px 0 20px 0;
-  color: var(--topic-color-text);
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 10px;
-}
-
-.component-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.component-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  background: white;
-}
-
-.component-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  border-color: #667eea;
-}
-
-.component-preview {
-  height: 150px;
-  background-color: #f8f9fa;
+.overview {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
 }
 
-.component-preview img {
+.card:not(:nth-child(1)) {
+  margin-left: 15px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 2px 2px 10px #cccccc54,-2px -2px 10px #cccccc54;
+}
+
+.overviews {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  border-bottom: var(--overview-card-size) solid var(--overview-card-color);
+  color: var(--topic-color-text);
+}
+
+.overviews-content {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-}
-
-.preview-placeholder {
-  font-size: 3rem;
-  color: #667eea;
-  font-weight: bold;
-  opacity: 0.7;
-}
-
-.component-info {
-  padding: 15px;
-}
-
-.component-info h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.3rem;
-  color: var(--topic-color-text);
-}
-
-.component-description {
-  margin: 0;
-  color: #666;
-  font-size: 0.95rem;
-  line-height: 1.4;
+  background-color: aliceblue;
 }
 </style>

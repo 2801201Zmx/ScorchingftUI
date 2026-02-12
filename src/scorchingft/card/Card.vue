@@ -5,21 +5,33 @@
 </template>
 
 <script setup lang="ts">
-import { CSSProperties, onMounted, ref, watch } from 'vue';
+import { CSSProperties, onMounted, PropType, ref, watch } from 'vue';
 
 
 const props = defineProps({
     width: {
-        type: Number || String,
+        type: [Number, String],
         default: 300
     },
     height: {
-        type: Number || String,
+        type: [Number, String],
         default: 200
     },
     border: {
         type: String,
-        default: '1px solid #ce9bfd'
+        default: '1px'
+    },
+    solid: {
+        type: Boolean,
+        default: false
+    },
+    dashed: {
+        type: Boolean,
+        default: false
+    },
+    color: {
+        type: String,
+        default: '#ce9bfd'
     }
 });
 
@@ -30,13 +42,13 @@ watch(() => props, (newVal) => {
         styles.value = {
             width: newVal.width,
             height: newVal.height,
-            border: newVal.border,
+            border: `${newVal.border} ${newVal.dashed ? 'dashed' : 'solid'} ${newVal.color}`,
         }
     } else {
         styles.value = {
             width: `${newVal.width}px`,
             height: `${newVal.height}px`,
-            border: newVal.border,
+            border: `${newVal.border} ${newVal.dashed ? 'dashed' : 'solid'} ${newVal.color}`,
         }
     }
 }, { deep: true });
@@ -46,13 +58,13 @@ onMounted(() => {
         styles.value = {
             width: props.width,
             height: props.height,
-            border: props.border,
+            border: `${props.border} ${props.dashed ? 'dashed' : 'solid'} ${props.color}`,
         }
     } else {
         styles.value = {
             width: `${props.width}px`,
             height: `${props.height}px`,
-            border: props.border,
+            border: `${props.border} ${props.dashed ? 'dashed' : 'solid'} ${props.color}`,
         }
     }
 })

@@ -51,11 +51,24 @@ interface Loaderprops {
 }
 
 interface Api {
-    attributess: Attributessslots[],
+    attributes: Attributessslots[],
     slots: Attributessslots[]
+}
+
+interface Apititle {
+    "attributes": string[],
+    "slots": string[],
+}
+
+interface Componentslist {
+    title: string,
+    component: {
+        title: string, 
+        path: string
+    }[]
 }
 
 export type { 
     Components, Strings, Compatibility, InstallMethodsItem, 
-    SetupSteps, Attributessslots, Api, StateItem, Loaderprops,
+    SetupSteps, Attributessslots, Api, Apititle, StateItem, Loaderprops, Componentslist
 };

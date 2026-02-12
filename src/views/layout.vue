@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { getHeaderLogo, getIsIndex, getPathName } from '@/utils/getpathname';
+import { getHeaderLogo, getIsIndex, getPathName } from '@/hooks/getpathname';
 // import { GitHubDark } from '@/scorchingft/icon/icon';
 
 const router = useRouter();

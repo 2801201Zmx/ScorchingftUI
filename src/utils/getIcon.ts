@@ -2,7 +2,7 @@ function toKebab(name: string) {
     return (name[0].toUpperCase() + name.replace(name[0], '')).replace('.vue', '').trim();
 }
 
-function getArrowIcon(paths: string): string[] {
+function getIcon(paths: string): string[] {
 
     const componentNames: string[] = [];
 
@@ -19,4 +19,4 @@ function getArrowIcon(paths: string): string[] {
     return componentNames;
 }
 
-export default getArrowIcon;
+export default getIcon;

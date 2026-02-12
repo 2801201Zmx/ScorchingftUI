@@ -1,6 +1,7 @@
 <template>
     <div class="content">
         <div class="zhan"></div>
+        <slot></slot>
         <div class="content-view" v-for="(item, index) in props.setupsteps">
             <div class="hr" v-if="item.isgap"></div>
             <div class="title">
@@ -30,6 +31,7 @@
             </Code>
             <div class="preview">
                 <slot :name="`${item.slot}-preview`"></slot>
+                <slot :name="`${item.slot}-preview`" :title="item.subheading"></slot>
             </div>
         </div>
         <div class="api" v-if="props.isapi">
@@ -40,22 +42,22 @@
                 </div>
                 <div :class="indexs" v-for="(apis, indexs) in api">
                     <div class="h2">
-                        Attributes
+                        {{ indexs }}
                     </div>
                     <table cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>
-                                    属性名
+                                    {{ apititle[indexs][0] }}
                                 </th>
                                 <th>
-                                    说明
+                                    {{ apititle[indexs][1] }}
                                 </th>
                                 <th>
-                                    类型
+                                    {{ apititle[indexs][2] }}
                                 </th>
                                 <th>
-                                    默认值
+                                    {{ apititle[indexs][3] }}
                                 </th>
                             </tr>
                         </thead>
@@ -79,6 +81,7 @@
                 </div>
             </div>
         </div>
+        <div class="zhan-di"></div>
     </div>
 </template>
 
@@ -87,7 +90,7 @@ import { ref, reactive } from 'vue';
 
 import Code from '@/component/code.vue';
 
-import type { Attributessslots, SetupSteps, Api } from '@/types/type';
+import type { Attributessslots, SetupSteps, Api, Apititle } from '@/types/type';
 
 const props = defineProps({
     setupsteps: {
@@ -102,6 +105,11 @@ const props = defineProps({
         type: Boolean,
         default: true
     }
+});
+
+const apititle = reactive<Apititle>({
+    "attributes": ['属性', '说明', '类型', '默认值'],
+    "slots": ['插槽名', '说明'],
 })
 
 </script>
@@ -109,6 +117,10 @@ const props = defineProps({
 <style scoped>
 .zhan {
     height: 80px;
+}
+
+.zhan-di {
+    height: 50px;
 }
 
 .content {

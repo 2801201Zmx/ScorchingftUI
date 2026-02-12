@@ -112,7 +112,7 @@ const slots = reactive<Array<Attributessslots>>([
 ])
 
 const api = reactive<Api>({
-    attributess: attributes,
+    attributes: attributes,
     slots: slots
 });
 
