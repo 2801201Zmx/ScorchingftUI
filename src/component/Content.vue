@@ -30,8 +30,7 @@
                 </template>
             </Code>
             <div class="preview">
-                <slot :name="`${item.slot}-preview`"></slot>
-                <slot :name="`${item.slot}-preview`" :title="item.subheading"></slot>
+                <slot :name="`${item.slot}-preview`" :title="item.subheading" :codetype="item.codetype"></slot>
             </div>
         </div>
         <div class="api" v-if="props.isapi">
@@ -90,7 +89,7 @@ import { ref, reactive } from 'vue';
 
 import Code from '@/component/code.vue';
 
-import type { Attributessslots, SetupSteps, Api, Apititle } from '@/types/type';
+import type { SetupSteps, Api, Apititle } from '@/types/type';
 
 const props = defineProps({
     setupsteps: {
@@ -153,7 +152,7 @@ const apititle = reactive<Apititle>({
 }
 
 .text {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
     color: var(--topic-color-text);
 }
 

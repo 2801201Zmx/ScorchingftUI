@@ -1,10 +1,10 @@
 <template>
-  <div class="title" v-for="(item, index) in Components" :key="index">
+  <div class="title" v-for="(item, index) in siderbar" :key="index">
     <span>
       {{ item.title }}
     </span>
     <div class="components" :class="{ componentsactive: isActive[getComponentIndex(item, component)] }"
-      v-for="component in item.components" :key="component.path" @click="handleClick(component);">
+      v-for="component in item.component" :key="component.path" @click="handleClick(component);">
       <span class="cursor">
         {{ component.title }}
       </span>
@@ -16,7 +16,7 @@
 import { ref, watchEffect } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
-import Components from '@/JSON/components.json';
+import siderbar from '@/hooks/getSiderbarlist';
 
 const router = useRouter();
 const route = useRoute();
@@ -24,17 +24,17 @@ const isActive = ref<boolean[]>([]);
 
 const getComponentIndex = (group: any, comp: any) => {
   let index = 0;
-  for (const g of Components) {
-    if (g === group) return index + g.components.indexOf(comp);
-    index += g.components.length;
+  for (const g of siderbar) {
+    if (g === group) return index + g.component.indexOf(comp);
+    index += g.component.length;
   }
   return -1;
 };
 
 watchEffect(() => {
   const activeStates: boolean[] = [];
-  Components.forEach(group => {
-    group.components.forEach(comp => {
+  siderbar.forEach(group => {
+    group.component.forEach(comp => {
       activeStates.push(route.path.includes(`${comp.path}`));
     });
   });

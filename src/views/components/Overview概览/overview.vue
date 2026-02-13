@@ -23,16 +23,15 @@
 
 <script setup lang="ts">
 import { onBeforeMount, reactive } from 'vue';
-import { useRouter } from 'vue-router';
 
 import type { SetupSteps } from '@/types/type';
 
 import Content from '@/component/Content.vue';
-import Components from '@/JSON/components.json';
+import siderbar from '@/hooks/getSiderbarlist';
 
 const setupSteps = reactive<SetupSteps[]>([]);
 
-function changeArry(arr: { title: string, components: { title: string, path: string }[] }[]) {
+function changeArry(arr: { title: string, component: { title: string, path: string }[] }[]) {
   for (const obj of arr) {
     setupSteps.push({
       title: '',
@@ -51,9 +50,9 @@ function changeArry(arr: { title: string, components: { title: string, path: str
 
 function getCategory(title: string): string[] {
   let obj: { [key: string]: string[] } = {};
-  for (const objs of Components) {
+  for (const objs of siderbar) {
     let array: string[] = [];
-    for (const child of objs.components)
+    for (const child of objs.component)
       array.push(child.title);
     obj[`${objs.title}`] = array;
   }
@@ -64,7 +63,7 @@ function getCategory(title: string): string[] {
 }
 
 onBeforeMount(() => {
-  changeArry(Components);
+  changeArry(siderbar);
 })
 </script>
 

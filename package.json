@@ -20,5 +20,8 @@
     "vite-plugin-vue-devtools": "^8.0.5",
     "vue": "^3",
     "vue-router": "^5.0.2"
+  },
+  "dependencies": {
+    "typescript": "^5.9.3"
   }
 }

@@ -7,6 +7,7 @@ body {
     overflow: hidden;
 }
 
+[cursor],
 .cursor {
     cursor: pointer;
     user-select: none;

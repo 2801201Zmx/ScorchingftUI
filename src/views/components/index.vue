@@ -3,7 +3,7 @@
         <div class="siderbar">
             <Siderbar/>
         </div>
-        <div class="content">
+        <div class="content-index">
             <RouterView></RouterView>
         </div>
     </main>
@@ -33,14 +33,14 @@ main {
 }
 
 .siderbar {
-    width: 16%;
+    width: 18%;
     height: calc(100% - var(--input-label-padding));
     padding: var(--input-label-padding);
     overflow-y:auto;
     overflow-x: hidden;
 }
 
-.content {
+.content-index {
     width: 100%;
     height: 100%;
     box-sizing:border-box;

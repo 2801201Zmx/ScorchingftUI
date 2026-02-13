@@ -28,7 +28,7 @@ main {
 }
 
 .siderbar {
-    width: 16%;
+    width: 18%;
     height: calc(100% - var(--input-label-padding));
     padding: var(--input-label-padding);
     overflow-y:auto;

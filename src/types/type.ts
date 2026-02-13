@@ -60,7 +60,7 @@ interface Apititle {
     "slots": string[],
 }
 
-interface Componentslist {
+interface Siderbarlist {
     title: string,
     component: {
         title: string, 
@@ -68,7 +68,13 @@ interface Componentslist {
     }[]
 }
 
+interface Messagefun {
+    message: string,
+    type: '' | 'success' | 'warning' | 'Error'
+}
+
 export type { 
     Components, Strings, Compatibility, InstallMethodsItem, 
-    SetupSteps, Attributessslots, Api, Apititle, StateItem, Loaderprops, Componentslist
+    SetupSteps, Attributessslots, Api, Apititle, StateItem, 
+    Loaderprops, Siderbarlist, Messagefun
 };
